@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d2d2d7;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #86868b;
+}
+
+::selection {
+  background: rgba(0, 0, 0, 0.08);
+  color: inherit;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::selection {
+    background: rgba(255, 255, 255, 0.12);
+  }
+}
