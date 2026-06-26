@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { ArrowRight, ExternalLink } from 'lucide-react'
 import { GitHubIcon } from '@/components/ui/GitHubIcon'
@@ -23,13 +24,46 @@ function renderHighlight(text: string) {
   )
 }
 
+function CardThumbnail({
+  thumbnail,
+  title,
+  aspect,
+}: {
+  thumbnail?: string | null
+  title: string
+  aspect: string
+}) {
+  if (thumbnail) {
+    return (
+      <div className={`relative ${aspect} bg-cream-100 dark:bg-neutral-800`}>
+        <Image
+          src={thumbnail}
+          alt={title}
+          fill
+          sizes="(max-width: 768px) 100vw, 50vw"
+          className="object-cover"
+        />
+      </div>
+    )
+  }
+  // No screenshots available for this project — initials placeholder
+  return (
+    <div className={`relative ${aspect} bg-cream-100 dark:bg-neutral-800 flex items-center justify-center`}>
+      <span className="text-4xl font-bold tracking-tight text-cream-300 dark:text-neutral-600 select-none">
+        {title.slice(0, 2).toUpperCase()}
+      </span>
+    </div>
+  )
+}
+
 interface PortfolioCardProps {
   project: Project
+  thumbnail?: string | null
   // Pass forceRegular to render a featured project as a standard card (used in homepage section)
   forceRegular?: boolean
 }
 
-export function PortfolioCard({ project, forceRegular = false }: PortfolioCardProps) {
+export function PortfolioCard({ project, thumbnail, forceRegular = false }: PortfolioCardProps) {
   const { slug, title, tagline, domains, status, featured, approach, stack, metrics, highlights, links } =
     project
 
@@ -40,6 +74,8 @@ export function PortfolioCard({ project, forceRegular = false }: PortfolioCardPr
         whileHover={{ y: -3, boxShadow: '0 16px 48px rgba(0,0,0,0.08)' }}
         transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
       >
+        <CardThumbnail thumbnail={thumbnail} title={title} aspect="aspect-[16/7]" />
+
         <div className="p-7 md:p-9">
           {/* Header */}
           <div className="flex flex-wrap items-start justify-between gap-4 mb-5">
@@ -142,6 +178,8 @@ export function PortfolioCard({ project, forceRegular = false }: PortfolioCardPr
       whileHover={{ y: -3, boxShadow: '0 12px 40px rgba(0,0,0,0.07)' }}
       transition={{ duration: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
     >
+      <CardThumbnail thumbnail={thumbnail} title={title} aspect="aspect-[16/10]" />
+
       <div className="flex flex-col flex-1 p-6">
         {/* Header row */}
         <div className="flex items-start justify-between gap-3 mb-4">

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ProjectsGrid } from '@/components/portfolio/ProjectsGrid'
+import { getAllProjects, getThumbnails } from '@/lib/projects'
 
 export const metadata: Metadata = {
   title: 'Portfolio — Bhanuprasad Kokkula',
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
 }
 
 export default function ProjectsPage() {
+  const projects = getAllProjects()
+  const thumbnails = getThumbnails(projects.map((p) => p.slug))
   return (
     <>
       <Header />
@@ -35,7 +38,7 @@ export default function ProjectsPage() {
             </p>
           </div>
 
-          <ProjectsGrid />
+          <ProjectsGrid projects={projects} thumbnails={thumbnails} />
         </div>
       </main>
       <Footer />

@@ -6,12 +6,12 @@ import { Menu, X } from 'lucide-react'
 import { ThemeToggle } from '@/components/ui/ThemeToggle'
 
 const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Experience', href: '#experience' },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Skills', href: '#skills' },
-  { label: 'Research', href: '#research' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'About', href: '/#about' },
+  { label: 'Experience', href: '/#experience' },
+  { label: 'Portfolio', href: '/#portfolio' },
+  { label: 'Skills', href: '/#skills' },
+  { label: 'Research', href: '/#research' },
+  { label: 'Contact', href: '/#contact' },
 ]
 
 export function Header() {
@@ -34,7 +34,7 @@ export function Header() {
     >
       <div className="max-w-6xl mx-auto px-6 md:px-10 h-11 flex items-center justify-between">
         <a
-          href="#hero"
+          href="/#hero"
           className="text-sm font-semibold tracking-tight text-neutral-900 dark:text-neutral-100 transition-opacity hover:opacity-60"
         >
           BK

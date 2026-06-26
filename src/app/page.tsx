@@ -3,13 +3,15 @@ import { Footer } from '@/components/layout/Footer'
 import { Hero } from '@/components/sections/Hero'
 import { About } from '@/components/sections/About'
 import { Experience } from '@/components/sections/Experience'
-import { Projects } from '@/components/sections/Projects'
 import { Portfolio } from '@/components/sections/Portfolio'
 import { Skills } from '@/components/sections/Skills'
 import { Research } from '@/components/sections/Research'
 import { Contact } from '@/components/sections/Contact'
+import { getAllProjects, getThumbnails } from '@/lib/projects'
 
 export default function Home() {
+  const projects = getAllProjects()
+  const thumbnails = getThumbnails(projects.map((p) => p.slug))
   return (
     <>
       <Header />
@@ -17,8 +19,7 @@ export default function Home() {
         <Hero />
         <About />
         <Experience />
-        <Projects />
-        <Portfolio />
+        <Portfolio projects={projects} thumbnails={thumbnails} />
         <Skills />
         <Research />
         <Contact />

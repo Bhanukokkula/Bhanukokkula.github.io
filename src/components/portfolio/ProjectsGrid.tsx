@@ -2,8 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { projects } from '@/data/projects'
-import type { ProjectDomain, ProjectStatus } from '@/data/projects'
+import type { Project, ProjectDomain, ProjectStatus } from '@/data/projects'
 import { PortfolioCard } from './PortfolioCard'
 
 const ALL = 'All'
@@ -17,9 +16,6 @@ const allDomains: ProjectDomain[] = [
 ]
 
 const allStatuses: ProjectStatus[] = ['Completed', 'Building', 'Planned']
-
-// Stable sort index so featured items preserve their array order among themselves
-const originalIndex = new Map(projects.map((p, i) => [p.slug, i]))
 
 const statusOrder: Record<ProjectStatus, number> = { Completed: 0, Building: 1, Planned: 2 }
 
@@ -47,17 +43,25 @@ function FilterPill({
   )
 }
 
-export function ProjectsGrid() {
+interface ProjectsGridProps {
+  projects: Project[]
+  thumbnails?: Record<string, string | null>
+}
+
+export function ProjectsGrid({ projects, thumbnails = {} }: ProjectsGridProps) {
   const [activeDomain, setActiveDomain] = useState<ProjectDomain | typeof ALL>(ALL)
   const [activeStatus, setActiveStatus] = useState<ProjectStatus | typeof ALL>(ALL)
 
+  // Stable sort index so featured items preserve the order given by src/lib/projects.ts
+  const originalIndex = useMemo(() => new Map(projects.map((p, i) => [p.slug, i])), [projects])
+
   const presentDomains = useMemo(
     () => allDomains.filter((d) => projects.some((p) => p.domains.includes(d))),
-    []
+    [projects]
   )
   const presentStatuses = useMemo(
     () => allStatuses.filter((s) => projects.some((p) => p.status === s)),
-    []
+    [projects]
   )
 
   const filtered = useMemo(() => {
@@ -79,7 +83,7 @@ export function ProjectsGrid() {
         // Non-featured: Completed → Building → Planned
         return statusOrder[a.status] - statusOrder[b.status]
       })
-  }, [activeDomain, activeStatus])
+  }, [activeDomain, activeStatus, projects, originalIndex])
 
   return (
     <div>
@@ -132,7 +136,7 @@ export function ProjectsGrid() {
                 transition={{ duration: 0.4, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.07 }}
                 className={project.featured ? 'md:col-span-2' : ''}
               >
-                <PortfolioCard project={project} />
+                <PortfolioCard project={project} thumbnail={thumbnails[project.slug]} />
               </motion.div>
             ))}
           </motion.div>

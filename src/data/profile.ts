@@ -20,24 +20,6 @@ export interface ExperienceItem {
   stack: string[]
 }
 
-export interface ProjectMetric {
-  label: string
-  value: string
-}
-
-export interface Project {
-  id: string
-  title: string
-  subtitle: string
-  domain: string
-  description: string
-  stack: string[]
-  metrics: ProjectMetric[]
-  githubUrl?: string   // TODO: add GitHub repo URL
-  demoUrl?: string     // TODO: add live demo URL
-  imageUrl?: string    // TODO: add screenshot or architecture diagram path
-}
-
 export interface SkillGroup {
   category: string
   skills: string[]
@@ -64,7 +46,6 @@ export interface ProfileData {
   summary: string
   education: Education
   experience: ExperienceItem[]
-  projects: Project[]
   skillGroups: SkillGroup[]
   certifications: Certification[]
   researchInterests: string[]
@@ -152,42 +133,6 @@ export const profile: ProfileData = {
         'Explored the foundational math behind statistical modeling, focusing on how random variables work within Generalized Linear Models (GLMs)',
       ],
       stack: ['Python', 'Statistics', 'GLMs', 'Deep Learning'],
-    },
-  ],
-
-  projects: [
-    {
-      id: 'mars',
-      title: 'MARS',
-      subtitle: 'Multi-Agent Risk Synthesis Framework',
-      domain: 'Finance / FinTech',
-      description:
-        'Capstone project — a five-layer multi-agent system for financial risk analysis. Orchestrates specialized agents across SEC EDGAR filings, macroeconomic FRED data, and real-time news to synthesize comprehensive risk assessments. Full architectural design, implementation, and documentation built from scratch.',
-      stack: ['LangGraph', 'Anthropic Claude API', 'ChromaDB', 'FastAPI', 'Python'],
-      metrics: [
-        { label: 'Accuracy', value: '68%' },
-        { label: 'Layers', value: '5' },
-        { label: 'Data Sources', value: '3' },
-      ],
-      githubUrl: undefined,  // TODO: add GitHub repo URL
-      demoUrl: undefined,    // TODO: add live demo URL
-      imageUrl: undefined,   // TODO: add /public path to architecture diagram
-    },
-    {
-      id: 'pharmaai',
-      title: 'PharmaAI',
-      subtitle: 'Drug Recommendation Engine',
-      domain: 'Healthcare / NLP',
-      description:
-        'End-to-end drug recommendation system with NLP-driven similarity scoring. Sentence-BERT embeddings power semantic drug matching, with a full-stack interface deployed on Microsoft Azure. Delivers strong classification performance across a large pharmaceutical dataset.',
-      stack: ['Sentence-BERT', 'Python', 'Microsoft Azure', 'FastAPI'],
-      metrics: [
-        { label: 'AUC', value: '0.87' },
-        { label: 'F1 Score', value: '92%' },
-      ],
-      githubUrl: undefined,  // TODO: add GitHub repo URL
-      demoUrl: undefined,    // TODO: add live demo URL
-      imageUrl: undefined,   // TODO: add /public path to screenshot
     },
   ],
 
