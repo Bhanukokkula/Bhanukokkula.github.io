@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sed -i '' \"s|const CONTENT = path.join\\(__dirname, '..', 'Documents', 'Personal_Website', 'content', 'projects'\\)|const CONTENT = '/Users/bhanu/Documents/Personal_Website/content/projects'|\" /tmp/write_frontmatter.js)",
+      "Bash(node /tmp/write_frontmatter.js)",
+      "Bash(npm install *)",
+      "Bash(head -35 src/data/projects.ts)",
+      "Bash(mv /tmp/projects_types.ts src/data/projects.ts)",
+      "Bash(node dims.mjs)",
+      "Bash(python3 -c ' *)",
+      "Bash(node check_alt.mjs)",
+      "Bash(npx playwright *)"
+    ]
+  }
+}

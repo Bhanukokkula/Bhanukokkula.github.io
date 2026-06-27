@@ -143,7 +143,18 @@ export const profile: ProfileData = {
     },
     {
       category: 'Machine Learning',
-      skills: ['Scikit-learn', 'XGBoost', 'LightGBM', 'PyTorch', 'TensorFlow'],
+      skills: [
+        'Scikit-learn',
+        'XGBoost',
+        'LightGBM',
+        'PyTorch',
+        'TensorFlow',
+        'pandas',
+        'NumPy',
+        'SciPy',
+        'Matplotlib',
+        'Seaborn',
+      ],
     },
     {
       category: 'NLP & LLMs',
@@ -154,12 +165,26 @@ export const profile: ProfileData = {
         'LLaMA',
         'OpenAI API',
         'Anthropic Claude API',
+        'Google Gemini API',
         'Hugging Face',
       ],
     },
     {
       category: 'Agentic AI & RAG',
-      skills: ['LangChain', 'LangGraph', 'FAISS', 'Pinecone', 'ChromaDB', 'LoRA'],
+      skills: [
+        'LangChain',
+        'LangGraph',
+        'FAISS',
+        'Pinecone',
+        'ChromaDB',
+        'LoRA',
+        'sentence-transformers',
+        'Streamlit',
+      ],
+    },
+    {
+      category: 'Causal Inference & Statistics',
+      skills: ['Propensity Score Matching', 'lme4', 'MatchIt', 'cobalt', 'glmnet', 'MCMCpack', 'Rosenbaum bounds', 'E-values'],
     },
     {
       category: 'Data Engineering',
@@ -167,7 +192,16 @@ export const profile: ProfileData = {
     },
     {
       category: 'Backend & Deployment',
-      skills: ['FastAPI', 'Azure Deployment', 'Full-stack ML Systems'],
+      skills: [
+        'FastAPI',
+        'Azure Deployment',
+        'Full-stack ML Systems',
+        'MLflow',
+        'SQLite',
+        'SQLAlchemy',
+        'Pydantic v2',
+        'pytest',
+      ],
     },
     {
       category: 'Domain Expertise',
@@ -194,6 +228,11 @@ export const profile: ProfileData = {
     {
       name: 'Bloomberg Market Concepts (BMC)',
       issuer: 'Bloomberg',
+      url: 'https://portal.bloombergforeducation.com/certificates/9iqWpFPRHmBZ2ggRNTavEcsi',
+    },
+    {
+      name: 'Bloomberg Finance Fundamentals',
+      issuer: 'Bloomberg',
       url: 'https://portal.bloombergforeducation.com/certificates/Sz8GDBFEzpZptQJnpmzMgB4W',
     },
     {
@@ -212,7 +251,7 @@ export const profile: ProfileData = {
 
   contact: {
     email: 'your.email@example.com',    // TODO: replace with your actual email
-    linkedin: 'https://linkedin.com/in/your-profile',  // TODO: replace with your LinkedIn URL
+    linkedin: 'https://www.linkedin.com/in/bhanu-kokkula/',
     github: 'https://github.com/Bhanukokkula',
   },
 }
