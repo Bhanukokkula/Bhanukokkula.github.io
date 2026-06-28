@@ -223,7 +223,12 @@ as not yet available.
 Two live end-to-end runs were executed against the running FastAPI service
 and Streamlit UI — ticker `AAPL`, current date (no `as_of`, i.e. "as of
 today"), using the real Gemini API, real SEC EDGAR filings, real FRED
-data, and real NewsAPI articles. Screenshots are in [images/](images/).
+data, and real NewsAPI articles.
+
+![MARS result for AAPL — composite score, direction, and confidence](/projects/mars/03_ui_result_AAPL.png)
+
+*Live result screen for AAPL: composite score +0.65, direction "increasing,"
+65% composite confidence, with each contributing agent's signal shown below.*
 
 **Run 1** (`images/03_ui_result_AAPL.png`):
 - Risk direction: **increasing**, composite score **+0.65**, composite

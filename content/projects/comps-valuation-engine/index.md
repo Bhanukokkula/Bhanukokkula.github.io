@@ -24,9 +24,6 @@ This folder is a standalone summary of the project (full source lives in
 `comps-engine/`). It exists to carry the project's details, real results,
 and screenshots in one place.
 
-![Dashboard overview](/projects/comps-valuation-engine/dashboard_overview.png)
-![Football field chart](/projects/comps-valuation-engine/football_field_screenshot.png)
-
 ---
 
 ## Problem
@@ -84,6 +81,12 @@ where most of the engineering effort went, not in model complexity.
   football-field chart, and a limitations panel rendered straight from
   `LIMITATIONS.md`.
 
+![Dashboard overview — target selector, ranked peer panel, multiples table](/projects/comps-valuation-engine/dashboard_overview.png)
+
+*The dashboard end to end: pick a target, see its ranked peer set with
+similarity scores, override peers manually, and read the multiples table
+that feeds the valuation range below.*
+
 ## Real results
 
 | Metric | Result |
@@ -93,6 +96,12 @@ where most of the engineering effort went, not in model complexity.
 | Test suite | **32** passing tests |
 | Peer-set validation | **90.6%** mean agreement vs. **8** hand-labeled reference sets — **in-sample**, tuned during sector-bucket design, **not held out** |
 | Multiples covered | EV/Revenue, EV/EBITDA, EV/EBIT, P/E, P/B |
+
+![Football-field chart — implied valuation range across peer multiples](/projects/comps-valuation-engine/football_field_screenshot.png)
+
+*The football-field chart: each bar is the peer-median-implied equity-value
+range (P25–P75) for one multiple, with the target's own value marked — the
+final output an analyst actually uses.*
 
 ### Peer validation detail (honest, not cherry-picked)
 

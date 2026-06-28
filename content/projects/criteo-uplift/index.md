@@ -87,15 +87,11 @@ Logistic regression propensity model + 1:1 nearest-neighbour matching with calip
 | All features SMD < 0.10 | — | ✓ |
 | Matched pairs | — | 278,946 |
 
-<p align="center">
-  <img src="figures/smd_love_plot.png" width="700" alt="Love plot: covariate balance before and after matching"/>
-</p>
+![Love plot: covariate balance before and after matching](/projects/criteo-uplift/smd_love_plot.png)
 
 *Love plot — all 12 features achieve SMD < 0.10 post-matching. The tight pre-matching SMD (max 0.049) reflects the RCT's near-balanced covariates.*
 
-<p align="center">
-  <img src="figures/propensity_score_overlap.png" width="700" alt="Propensity score overlap by treatment group"/>
-</p>
+![Propensity score overlap by treatment group](/projects/criteo-uplift/propensity_score_overlap.png)
 
 *Propensity score overlap — both groups cluster near P(T=1) ≈ 0.85 (the dataset's treatment probability). Common support is excellent; no trimming required.*
 
@@ -111,9 +107,7 @@ Three estimators with 1000-resample percentile bootstrap CIs, weight trimming at
 | **IPW** | +0.001043 | [0.000858, 0.001232] |
 | **AIPW** | −0.000127 | [−0.000138, −0.000116] |
 
-<p align="center">
-  <img src="figures/ate_forest_plot.png" width="700" alt="ATE forest plot: Naive, IPW, AIPW with 95% bootstrap CIs"/>
-</p>
+![ATE forest plot: Naive, IPW, AIPW with 95% bootstrap CIs](/projects/criteo-uplift/ate_forest_plot.png)
 
 **IPW recovers the naive ATE within CIs** — the key validation. AIPW diverges (see Limitations): the doubly-robust correction overshoots under the outcome model's severe class imbalance (~0.31% positives), pushing the estimate slightly negative. This is a known failure mode of logistic-regression-based AIPW on rare events, not evidence of a true negative effect.
 
@@ -130,27 +124,19 @@ T-Learner and X-Learner with XGBoost, 3-fold CV grid search over `{n_estimators,
 | **T-Learner** | **+0.097** | +19.1 | 0.51% | **+66%** |
 | X-Learner | −0.855 | −167.8 | 0.04% | −87% |
 
-<p align="center">
-  <img src="figures/qini_curve.png" width="700" alt="Qini curves: T-Learner vs X-Learner vs random"/>
-</p>
+![Qini curves: T-Learner vs X-Learner vs random](/projects/criteo-uplift/qini_curve.png)
 
-<p align="center">
-  <img src="figures/uplift_curve.png" width="700" alt="Uplift curves: gain over random targeting"/>
-</p>
+![Uplift curves: gain over random targeting](/projects/criteo-uplift/uplift_curve.png)
 
 **T-Learner** successfully ranks units by persuadability. Targeting the top-20% of users by predicted CATE achieves a 0.51% conversion rate versus the 0.31% population baseline — a **+66% relative lift**.
 
 **X-Learner fails** on this dataset. The 85/15 arm imbalance means μ̂₀ (control model) is trained on only ~240K units but must generalise to ~1.36M treated units in stage-2 imputation. The resulting D₁ = Y₁ − μ̂₀(X) estimates are systematically biased, and τ̂₁ memorises this bias. CATE rankings invert — the model selects *anti-persuadable* units. This is a documented X-Learner failure mode under severe arm imbalance (Nie & Wager 2021) and is as instructive as a success.
 
-<p align="center">
-  <img src="figures/decile_lift_barchart.png" width="700" alt="Decile lift analysis: lift vs random by decile"/>
-</p>
+![Decile lift analysis: lift vs random by decile](/projects/criteo-uplift/decile_lift_barchart.png)
 
 *Decile lift chart — T-Learner concentrates positive lift in the top 2–3 deciles, confirming the model identifies a genuinely higher-responding subgroup.*
 
-<p align="center">
-  <img src="figures/feature_importance.png" width="700" alt="XGBoost feature importances for T-Learner"/>
-</p>
+![XGBoost feature importances for T-Learner](/projects/criteo-uplift/feature_importance.png)
 
 *XGBoost feature importances (T-Learner treatment model). Features are anonymised; `f4` and `f0` carry the most signal.*
 

@@ -65,6 +65,10 @@ export function Experience() {
                     </span>
                   </div>
 
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4">
+                    {exp.description}
+                  </p>
+
                   <ul className="space-y-2 mb-4">
                     {exp.achievements.map((a, j) => (
                       <li

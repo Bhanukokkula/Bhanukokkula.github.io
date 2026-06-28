@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Download, Mail } from 'lucide-react'
+import { Eye, Mail } from 'lucide-react'
 import { profile } from '@/data/profile'
 
 const container = {
@@ -18,7 +18,7 @@ const item = {
 }
 
 export function Hero() {
-  const heroSummary = profile.summary.split('. ').slice(0, 2).join('. ') + '.'
+  const heroSummary = profile.summary.split('. ').slice(0, 1).join('. ') + '.'
 
   return (
     <section
@@ -66,18 +66,19 @@ export function Hero() {
 
           <motion.div variants={item} className="flex flex-wrap justify-center gap-3">
             <a
-              href="#projects"
+              href="#portfolio"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 text-sm font-medium hover:opacity-80 transition-opacity"
             >
               View Projects
             </a>
             <a
               href="/resume.pdf"
-              download
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-cream-300 dark:border-neutral-700 text-neutral-700 dark:text-neutral-300 hover:bg-cream-100 dark:hover:bg-neutral-800 text-sm font-medium transition-colors"
             >
-              <Download size={14} />
-              Download Resume
+              <Eye size={14} />
+              View Resume
             </a>
             <a
               href="#contact"

@@ -14,6 +14,7 @@ const CONTENT_DIR = path.join(process.cwd(), 'content', 'projects')
 const SLUG_ORDER = [
   'filings-reasoning-engine',
   'mars',
+  'quant-factor-backtest',
   'comps-valuation-engine',
   'covenant-compliance-engine',
   'criteo-uplift',

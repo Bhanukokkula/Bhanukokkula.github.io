@@ -4,10 +4,10 @@
 export interface Education {
   school: string
   degree: string
-  graduation: string
-  gpa: string
-  researchFocus: string
-  tools: string[]
+  graduation?: string
+  gpa?: string
+  researchFocus?: string
+  tools?: string[]
 }
 
 export interface ExperienceItem {
@@ -16,6 +16,7 @@ export interface ExperienceItem {
   company: string
   type: 'full-time' | 'intern' | 'research'
   duration: string
+  description: string
   achievements: string[]
   stack: string[]
 }
@@ -44,7 +45,7 @@ export interface ProfileData {
   location: string
   status: string
   summary: string
-  education: Education
+  education: Education[]
   experience: ExperienceItem[]
   skillGroups: SkillGroup[]
   certifications: Certification[]
@@ -61,14 +62,20 @@ export const profile: ProfileData = {
   summary:
     'Data Scientist with ~2 years of industry experience and 1.5 years of GenAI research at Rutgers, specializing in agentic AI systems, RAG pipelines, and ML for financial services. Built production fraud detection models delivering measurable business impact (8% fraud reduction, 50% precision lift) and architected MARS, a multi-agent risk synthesis framework for financial analysis. M.S. in Data Science from Rutgers (GPA 3.7, May 2026), with deep interest in LLMs, model risk evaluation, and applied ML in fintech and legal tech.',
 
-  education: {
-    school: 'Rutgers University',
-    degree: 'M.S. in Data Science',
-    graduation: 'May 2026',
-    gpa: '3.7 / 4.0',
-    researchFocus: 'Generative AI — RAG systems, LLM fine-tuning, model risk & bias assessment',
-    tools: ['FAISS', 'Pinecone', 'LangChain', 'BERTopic', 'SentenceBERT', 'LLaMA', 'LoRA'],
-  },
+  education: [
+    {
+      school: 'Rutgers, The State University of New Jersey',
+      degree: 'M.S. in Data Science',
+      graduation: 'May 2026',
+      gpa: '3.7 / 4.0',
+      researchFocus: 'Generative AI — RAG systems, LLM fine-tuning, model risk & bias assessment',
+      tools: ['FAISS', 'Pinecone', 'LangChain', 'BERTopic', 'SentenceBERT', 'LLaMA', 'LoRA'],
+    },
+    {
+      school: 'University of Pennsylvania',
+      degree: 'Professional Certificate Course — AI for Business',
+    },
+  ],
 
   experience: [
     {
@@ -77,6 +84,8 @@ export const profile: ProfileData = {
       company: 'Hexaware Technologies',
       type: 'full-time',
       duration: '~14 months',
+      description:
+        'Embedded on a financial-services data science team, building and shipping production ML models for fraud detection and optimizing the pipelines that serve them.',
       achievements: [
         '8% reduction in fraud through ML-driven detection models',
         '40% pipeline speedup via optimization and infrastructure improvements',
@@ -86,16 +95,31 @@ export const profile: ProfileData = {
     },
     {
       id: 'rutgers-research',
-      title: 'GenAI Researcher',
+      title: 'GenAI Researcher (Independent Applied Research)',
       company: 'Rutgers University',
       type: 'research',
       duration: '~1.5 years',
+      description:
+        'Independent applied research alongside the M.S. program on retrieval-augmented generation and LLM adaptation for academic research workflows — emphasis on reproducibility and honest benchmarking over headline metrics.',
       achievements: [
-        'Designed and evaluated Retrieval-Augmented Generation systems',
-        'Conducted LLM fine-tuning experiments using LoRA on domain-specific corpora',
-        'Developed model bias & risk evaluation frameworks for production LLMs',
+        'Built an offline LLaMA + LangChain document search system with agentic retrieval over mixed-format corpora (PDF, HTML, LaTeX, Word)',
+        'RAG/retrieval R&D across FAISS, Pinecone, and ChromaDB; LoRA fine-tuning with custom precision/recall benchmarks — ~50% improvement in task-specific precision',
+        'Benchmarked open-source tools (retrieval quality, latency, scalability) and tracked experiments via Streamlit/Plotly dashboards to inform team adoption',
       ],
-      stack: ['LangChain', 'LangGraph', 'FAISS', 'Pinecone', 'HuggingFace', 'LoRA', 'Python'],
+      stack: [
+        'Python',
+        'PyTorch',
+        'Hugging Face',
+        'LoRA',
+        'LangChain',
+        'FAISS',
+        'Pinecone',
+        'ChromaDB',
+        'OpenAI API',
+        'Anthropic API',
+        'Streamlit',
+        'Plotly',
+      ],
     },
     {
       id: 'chinmaya',
@@ -103,6 +127,8 @@ export const profile: ProfileData = {
       company: 'Chinmaya Technologies',
       type: 'intern',
       duration: '~5 months',
+      description:
+        'Early-career internship applying core data science and ML techniques across multiple client projects, end to end from data ingestion to deployment.',
       achievements: [
         'Applied data science and ML model development across multiple projects',
         'Built end-to-end ML pipelines from data ingestion to model deployment',
@@ -115,6 +141,8 @@ export const profile: ProfileData = {
       company: 'Echortech',
       type: 'intern',
       duration: '~4 months',
+      description:
+        'Focused on building reliable data infrastructure on Google Cloud — the ETL pipelines and scheduled workflows that downstream analytics depended on.',
       achievements: [
         'Built and maintained ETL pipelines on Google Cloud Platform',
         'Authored Airflow DAGs for automated data workflows',
@@ -128,6 +156,8 @@ export const profile: ProfileData = {
       company: 'IIT Kharagpur',
       type: 'research',
       duration: 'May 2020 – August 2020',
+      description:
+        'Summer research internship focused on the theoretical foundations of ML and deep learning, ahead of applying them in production roles later on.',
       achievements: [
         'Completed a guided study on the fundamentals of Machine Learning (ML) and Deep Learning (DL) architectures',
         'Explored the foundational math behind statistical modeling, focusing on how random variables work within Generalized Linear Models (GLMs)',
@@ -219,6 +249,7 @@ export const profile: ProfileData = {
     {
       name: 'Azure Data Scientist Associate',
       issuer: 'Microsoft',
+      url: 'https://learn.microsoft.com/en-us/users/bhanukokkula-1243/credentials/eea52dc12acc0a25',
     },
     {
       name: 'Microsoft Certified: Azure AI Fundamentals',
