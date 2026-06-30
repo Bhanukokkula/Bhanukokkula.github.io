@@ -38,6 +38,11 @@ export interface ContactInfo {
   github: string     // TODO: replace with your GitHub URL
 }
 
+export interface ResearchInterest {
+  title: string
+  description: string
+}
+
 export interface ProfileData {
   name: string
   preferredName: string
@@ -49,7 +54,7 @@ export interface ProfileData {
   experience: ExperienceItem[]
   skillGroups: SkillGroup[]
   certifications: Certification[]
-  researchInterests: string[]
+  researchInterests: ResearchInterest[]
   contact: ContactInfo
 }
 
@@ -57,7 +62,7 @@ export const profile: ProfileData = {
   name: 'Bhanuprasad Kokkula',
   preferredName: 'Boss',
   tagline: 'Data Scientist & GenAI Engineer',
-  location: 'New Jersey, USA',
+  location: 'New York, NY',
   status: 'Open to opportunities',
   summary:
     'Data Scientist with ~2 years of industry experience and 1.5 years of GenAI research at Rutgers, specializing in agentic AI systems, RAG pipelines, and ML for financial services. Built production fraud detection models delivering measurable business impact (8% fraud reduction, 50% precision lift) and architected MARS, a multi-agent risk synthesis framework for financial analysis. M.S. in Data Science from Rutgers (GPA 3.7, May 2026), with deep interest in LLMs, model risk evaluation, and applied ML in fintech and legal tech.',
@@ -274,10 +279,22 @@ export const profile: ProfileData = {
   ],
 
   researchInterests: [
-    'Gender bias in scientific literature using computational linguistics',
-    'Analysis of the "Man the Hunter" hypothesis via NLP — epistemic modality & rhetorical bias detection',
-    'Quantitative NLP metrics: chi-square, odds ratios, WEAT',
-    'LLM safety, model bias, and agentic AI systems',
+    {
+      title: 'Agentic Commerce',
+      description: 'AI systems that autonomously navigate purchasing flows, compare products, and complete transactions — reducing friction while keeping humans in the loop for trust-critical decisions.',
+    },
+    {
+      title: 'Autonomous AI',
+      description: 'Agents that reason, plan, and act across multi-step tasks without hand-holding — from financial analysis to document parsing — with measurable evaluation, not demo magic.',
+    },
+    {
+      title: 'Behavioral Compliance',
+      description: 'Mapping how organizations actually behave under regulatory pressure using NLP and causal methods — finding the gap between stated policy and real practice.',
+    },
+    {
+      title: 'AI Guardrails',
+      description: 'The verification layers, sandboxing, and abstention mechanisms that make AI safe to deploy in high-stakes domains — the engineering between "it works in demos" and "it\'s trustworthy in production."',
+    },
   ],
 
   contact: {

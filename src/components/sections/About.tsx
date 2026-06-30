@@ -1,11 +1,9 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Briefcase, GraduationCap, FlaskConical, MapPin } from 'lucide-react'
+import { GraduationCap, FlaskConical, MapPin } from 'lucide-react'
 import { SectionWrapper } from '@/components/ui/SectionWrapper'
 import { profile } from '@/data/profile'
-
-const rutgersResearch = profile.experience.find((e) => e.id === 'rutgers-research')!
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -38,10 +36,12 @@ export function About() {
         </p>
       </motion.div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {/* Work Summary */}
+      {/* items-start so cards only grow to their own content height */}
+      <div className="grid md:grid-cols-2 gap-6 items-start">
+
+        {/* Education */}
         <motion.div
-          className="rounded-2xl border border-cream-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-sm"
+          className="rounded-2xl border border-cream-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm"
           custom={0}
           variants={fadeUp}
           initial="hidden"
@@ -49,30 +49,7 @@ export function About() {
           viewport={{ once: true }}
         >
           <div className="flex items-center gap-2 mb-4">
-            <Briefcase size={15} className="text-neutral-400 dark:text-neutral-500" />
-            <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
-              Work Summary
-            </span>
-          </div>
-          <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed">
-            ~2 years in production ML for financial services (fraud detection, model
-            deployment), plus {rutgersResearch.duration} of independent GenAI research at
-            Rutgers on retrieval-augmented generation and LLM adaptation — reproducibility
-            and honest benchmarking over headline metrics.
-          </p>
-        </motion.div>
-
-        {/* Education — university names highlighted */}
-        <motion.div
-          className="rounded-2xl border border-cream-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-sm"
-          custom={1}
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <div className="flex items-center gap-2 mb-4">
-            <GraduationCap size={15} className="text-neutral-400 dark:text-neutral-500" />
+            <GraduationCap size={14} className="text-neutral-400 dark:text-neutral-500" />
             <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
               Education
             </span>
@@ -83,17 +60,19 @@ export function About() {
                 key={i}
                 className={i > 0 ? 'pt-4 border-t border-cream-100 dark:border-neutral-800/60' : ''}
               >
-                <div className="text-sm font-semibold text-neutral-900 dark:text-neutral-50">
-                  {edu.school}
-                </div>
-                <div className="text-sm text-neutral-500 dark:text-neutral-400 mt-0.5">
-                  {edu.degree}
-                </div>
-                {(edu.graduation || edu.gpa) && (
-                  <div className="text-xs text-neutral-400 dark:text-neutral-500 mt-1.5 uppercase tracking-wider">
-                    {[edu.graduation, edu.gpa && `GPA ${edu.gpa}`].filter(Boolean).join(' · ')}
+                  <div>
+                    <div className="text-[13px] font-semibold text-neutral-900 dark:text-neutral-50 leading-snug">
+                      {edu.school}
+                    </div>
+                    <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">
+                      {edu.degree}
+                    </div>
+                    {(edu.graduation || edu.gpa) && (
+                      <div className="text-[11px] text-neutral-400 dark:text-neutral-500 mt-1 uppercase tracking-wider">
+                        {[edu.graduation, edu.gpa && `GPA ${edu.gpa}`].filter(Boolean).join(' · ')}
+                      </div>
+                    )}
                   </div>
-                )}
               </div>
             ))}
           </div>
@@ -101,31 +80,36 @@ export function About() {
 
         {/* Interests */}
         <motion.div
-          className="rounded-2xl border border-cream-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-6 shadow-sm"
-          custom={2}
+          className="rounded-2xl border border-cream-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm"
+          custom={1}
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
           <div className="flex items-center gap-2 mb-4">
-            <FlaskConical size={15} className="text-neutral-400 dark:text-neutral-500" />
+            <FlaskConical size={14} className="text-neutral-400 dark:text-neutral-500" />
             <span className="text-xs font-semibold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
-              Interests
+              Research Interests
             </span>
           </div>
-          <ul className="space-y-2">
+          <ul className="space-y-3">
             {profile.researchInterests.map((interest, i) => (
-              <li
-                key={i}
-                className="flex items-start gap-2 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed"
-              >
-                <span className="mt-[7px] w-1 h-1 rounded-full bg-neutral-400 shrink-0" />
-                {interest}
+              <li key={i} className="flex items-start gap-2">
+                <span className="mt-[6px] w-1 h-1 rounded-full bg-neutral-400 dark:bg-neutral-600 shrink-0" />
+                <div>
+                  <div className="text-[13px] font-medium text-neutral-800 dark:text-neutral-200 leading-snug">
+                    {interest.title}
+                  </div>
+                  <div className="text-[11px] text-neutral-500 dark:text-neutral-400 mt-0.5 leading-relaxed">
+                    {interest.description}
+                  </div>
+                </div>
               </li>
             ))}
           </ul>
         </motion.div>
+
       </div>
     </SectionWrapper>
   )

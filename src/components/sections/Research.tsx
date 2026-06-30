@@ -5,6 +5,14 @@ import { FlaskConical, Award } from 'lucide-react'
 import { SectionWrapper } from '@/components/ui/SectionWrapper'
 import { profile } from '@/data/profile'
 
+const ISSUER_BRAND: Record<string, { bg: string; text: string; short: string }> = {
+  Microsoft:           { bg: '#0078D4', text: '#fff', short: 'MS' },
+  Bloomberg:           { bg: '#F26724', text: '#fff', short: 'BBG' },
+  'LinkedIn Learning': { bg: '#0A66C2', text: '#fff', short: 'in' },
+}
+
+const DEFAULT_BRAND = { bg: '#404040', text: '#fff', short: '★' }
+
 export function Research() {
   return (
     <SectionWrapper id="research" alt>
@@ -24,6 +32,7 @@ export function Research() {
       </motion.div>
 
       <div className="grid md:grid-cols-2 gap-12">
+        {/* Research interests */}
         <div>
           <motion.div
             className="flex items-center gap-2 mb-6"
@@ -37,7 +46,7 @@ export function Research() {
               Research Interests
             </h3>
           </motion.div>
-          <ul className="space-y-4">
+          <ul className="space-y-5">
             {profile.researchInterests.map((interest, i) => (
               <motion.li
                 key={i}
@@ -45,15 +54,23 @@ export function Research() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.08 }}
-                className="flex items-start gap-3 text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed"
+                className="flex items-start gap-3"
               >
                 <span className="mt-[9px] w-1 h-1 rounded-full bg-neutral-400 shrink-0" />
-                {interest}
+                <div>
+                  <div className="text-sm font-medium text-neutral-800 dark:text-neutral-200">
+                    {interest.title}
+                  </div>
+                  <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-1 leading-relaxed">
+                    {interest.description}
+                  </div>
+                </div>
               </motion.li>
             ))}
           </ul>
         </div>
 
+        {/* Certifications — vertical rows with branded snapshot header */}
         <div>
           <motion.div
             className="flex items-center gap-2 mb-6"
@@ -67,22 +84,42 @@ export function Research() {
               Certifications
             </h3>
           </motion.div>
-          <div className="space-y-4">
-            {profile.certifications.map((cert, i) => {
-              const content = (
-                <>
-                  <div className="text-sm font-medium text-neutral-900 dark:text-neutral-100">
-                    {cert.name}
-                  </div>
-                  <div className="text-xs text-neutral-400 dark:text-neutral-500 mt-1 uppercase tracking-wider">
-                    {cert.issuer}
-                  </div>
-                </>
-              )
 
-              const className =
-                'block rounded-2xl border border-cream-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-5 shadow-sm transition-shadow duration-200' +
-                (cert.url ? ' hover:shadow-md hover:border-cream-300 dark:hover:border-neutral-700' : '')
+          <div className="grid grid-cols-2 gap-4">
+            {profile.certifications.map((cert, i) => {
+              const brand = ISSUER_BRAND[cert.issuer] ?? DEFAULT_BRAND
+              const inner = (
+                <div className="rounded-2xl border border-cream-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 shadow-sm overflow-hidden h-full flex flex-col transition-shadow duration-200 hover:shadow-md hover:border-cream-300 dark:hover:border-neutral-700">
+                  {/* Branded snapshot header */}
+                  <div
+                    className="flex flex-col items-center justify-center gap-1 py-5"
+                    style={{ backgroundColor: brand.bg }}
+                  >
+                    <span className="text-2xl font-black tracking-tight" style={{ color: brand.text }}>
+                      {brand.short}
+                    </span>
+                    <span
+                      className="text-[10px] font-semibold uppercase tracking-widest opacity-80"
+                      style={{ color: brand.text }}
+                    >
+                      {cert.issuer}
+                    </span>
+                  </div>
+                  {/* Cert details */}
+                  <div className="p-4 flex flex-col gap-1 flex-1">
+                    <div className="text-xs font-medium text-neutral-900 dark:text-neutral-100 leading-snug">
+                      {cert.name}
+                    </div>
+                    {cert.url && (
+                      <div className="mt-auto pt-2">
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-neutral-400 dark:text-neutral-500">
+                          View certificate →
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )
 
               return (
                 <motion.div
@@ -90,15 +127,16 @@ export function Research() {
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.1 }}
+                  transition={{ duration: 0.45, ease: [0.25, 0.1, 0.25, 1], delay: i * 0.08 }}
                   whileHover={cert.url ? { y: -3, transition: { duration: 0.2 } } : undefined}
+                  className="h-full"
                 >
                   {cert.url ? (
-                    <a href={cert.url} target="_blank" rel="noopener noreferrer" className={className}>
-                      {content}
+                    <a href={cert.url} target="_blank" rel="noopener noreferrer" className="block h-full">
+                      {inner}
                     </a>
                   ) : (
-                    <div className={className}>{content}</div>
+                    inner
                   )}
                 </motion.div>
               )
